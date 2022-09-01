@@ -11,7 +11,7 @@ migrate_down:
 	migrate -path src/infrastructure/db/migrations -database "$(POSTGRES_URL)" -verbose down
 
 generate_query:
-	sqlc generate
+	docker run --rm -v "${pwd}:/src" -w /src kjconroy/sqlc generate
 
 test:
 	go test -v ./...

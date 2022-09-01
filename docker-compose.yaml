@@ -4,17 +4,17 @@ services:
   app:
     build: .
     entrypoint: ./.docker/app/entrypoint.sh
-    container_name: bank-transactions-simulations-app
+    container_name: Database-Transactions-Simulation-app
     networks:
-      - bank-transactions-simulations-network
+      - Database-Transactions-Simulation-network
     volumes:
-      - .:/go/bank-transactions-simulations
+      - .:/go/Database-Transactions-Simulation
     depends_on:
       - db
 
   db:
     image: postgres:14.3-alpine
-    container_name: bank-transactions-simulations-db
+    container_name: Database-Transactions-Simulation-db
     restart: always
     tty: true
     volumes:
@@ -27,8 +27,8 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=simple_bank
     networks:
-      - bank-transactions-simulations-network
+      - Database-Transactions-Simulation-network
 
 networks:
-  bank-transactions-simulations-network:
+  Database-Transactions-Simulation-network:
     driver: bridge

@@ -1,7 +1,8 @@
-FROM golang:1.18.2-alpine3.16
+FROM golang:1.19.0-bullseye
 
-RUN apk add --update --upgrade bash curl make gcc g++
+RUN apt update && apt upgrade -y
+RUN apt install bash curl make gcc g++ -y
 
-ENV PATH="$PATH:/bin/bash:/gobin"
+ENV PATH="$PATH:/bin/bash"
 
-WORKDIR /go/bank-transactions-simulations
+WORKDIR /go/Database-Transactions-Simulation
