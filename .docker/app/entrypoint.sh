@@ -23,4 +23,4 @@ go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
 echo "Executing sqlc..."
 sqlc generate
 
-top
+top -b
