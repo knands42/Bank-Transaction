@@ -15,6 +15,6 @@ generate_query:
 	sqlc generate
 
 test:
-	go test -v ./...
+	go test -v -cover ./...
 
 .PHONY: execute create_migration migrate_up migrate_down generate_query test
