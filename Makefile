@@ -17,4 +17,7 @@ generate_query:
 test:
 	go test -v -cover ./...
 
-.PHONY: execute create_migration migrate_up migrate_down generate_query test
+server:
+	go run src/main.go
+
+.PHONY: execute create_migration migrate_up migrate_down generate_query test server

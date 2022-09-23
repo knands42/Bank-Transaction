@@ -5,6 +5,8 @@ services:
     build: .
     entrypoint: ./.docker/app/entrypoint.sh
     container_name: Database-Transactions-Simulation-app
+    ports:
+      - 8080:8080
     networks:
       - Database-Transactions-Simulation-network
     volumes:
