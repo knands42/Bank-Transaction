@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -f ".env" ]; then
-    cp .env.example .env
+if [ ! -f "app.env" ]; then
+    touch app.env
 fi
 
 export TERM=xterm
