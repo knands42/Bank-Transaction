@@ -1,4 +1,4 @@
-package db_test
+package db
 
 import (
 	"context"
@@ -6,13 +6,12 @@ import (
 	"testing"
 	"time"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 	"github.com/stretchr/testify/require"
 )
 
-func createRandomAccount(t *testing.T) db.Account {
-	arg := db.CreateAccountParams{
+func createRandomAccount(t *testing.T) Account {
+	arg := CreateAccountParams{
 		Owner:    util.RandomOwner(),
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
@@ -53,7 +52,7 @@ func Test_GetAccount(t *testing.T) {
 func Test_UpdateAccount(t *testing.T) {
 	account1 := createRandomAccount(t)
 
-	arg := db.UpdateAccountParams{
+	arg := UpdateAccountParams{
 		ID:      account1.ID,
 		Balance: util.RandomMoney(),
 	}
@@ -86,7 +85,7 @@ func Test_ListAccount(t *testing.T) {
 		createRandomAccount(t)
 	}
 
-	arg := db.ListAccountsParams{
+	arg := ListAccountsParams{
 		Limit:  5,
 		Offset: 5,
 	}

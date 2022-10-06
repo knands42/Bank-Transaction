@@ -12,7 +12,7 @@ migrate_up:
 migrate_down:
 	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose down
 
-generate_query:
+query:
 	sqlc generate
 
 test:
@@ -21,4 +21,7 @@ test:
 server:
 	go run src/main.go
 
-.PHONY: execute create_migration migrate_up migrate_down generate_query test server
+mock:
+	mockgen -destination=src/infrastructure/db/mock/store.go -package=mockdb github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc Store
+
+.PHONY: execute create_migration migrate_up migrate_down query test server mock

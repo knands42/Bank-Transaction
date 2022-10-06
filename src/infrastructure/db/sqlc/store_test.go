@@ -1,16 +1,15 @@
-package db_test
+package db
 
 import (
 	"context"
 	"fmt"
 	"testing"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_TransferTx(t *testing.T) {
-	store := db.NewStore(testDB)
+	store := NewStore(testDB)
 
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
@@ -21,11 +20,11 @@ func Test_TransferTx(t *testing.T) {
 	amount := int64(10)
 
 	errs := make(chan error)
-	results := make(chan db.TransferTxResult)
+	results := make(chan TransferTxResult)
 
 	for i := 0; i < n; i++ {
 		go func() {
-			result, err := store.TransferTx(context.Background(), db.TransferTxParams{
+			result, err := store.TransferTx(context.Background(), TransferTxParams{
 				FromAccountID: account1.ID,
 				ToAccountID:   account2.ID,
 				Amount:        amount,
@@ -114,7 +113,7 @@ func Test_TransferTx(t *testing.T) {
 }
 
 func Test_TransferTxDeadlock(t *testing.T) {
-	store := db.NewStore(testDB)
+	store := NewStore(testDB)
 
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
@@ -136,7 +135,7 @@ func Test_TransferTxDeadlock(t *testing.T) {
 		}
 
 		go func() {
-			_, err := store.TransferTx(context.Background(), db.TransferTxParams{
+			_, err := store.TransferTx(context.Background(), TransferTxParams{
 				FromAccountID: fromAccountID,
 				ToAccountID:   toAccountID,
 				Amount:        amount,

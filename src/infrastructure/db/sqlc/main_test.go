@@ -1,4 +1,4 @@
-package db_test
+package db
 
 import (
 	"database/sql"
@@ -6,12 +6,11 @@ import (
 	"os"
 	"testing"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 	_ "github.com/lib/pq"
 )
 
-var testQueries *db.Queries
+var testQueries *Queries
 var testDB *sql.DB
 
 func TestMain(m *testing.M) {
@@ -25,7 +24,7 @@ func TestMain(m *testing.M) {
 		log.Fatal("cannot connect to db:", err)
 	}
 
-	testQueries = db.New(testDB)
+	testQueries = New(testDB)
 
 	os.Exit(m.Run())
 }
