@@ -9,8 +9,14 @@ create_migration:
 migrate_up:
 	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose up
 
+migrate_up1:
+	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose up 1
+
 migrate_down:
 	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose down
+
+migrate_down1:
+	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose down 1
 
 query:
 	sqlc generate
