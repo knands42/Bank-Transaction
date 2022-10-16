@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/api"
+	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/api"
 	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 )
