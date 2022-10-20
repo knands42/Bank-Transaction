@@ -1,9 +1,10 @@
-package token
+package jwt
 
 import (
 	"testing"
 	"time"
 
+	token_maker "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/token"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/stretchr/testify/require"
@@ -43,12 +44,12 @@ func TestExpiredJWTToken(t *testing.T) {
 
 	payload, err := maker.VerifyToken(token)
 	require.Error(t, err)
-	require.EqualError(t, err, ErrExpiredToken.Error())
+	require.EqualError(t, err, token_maker.ErrExpiredToken.Error())
 	require.Nil(t, payload)
 }
 
 func TestInvalidJWTToken(t *testing.T) {
-	payload, err := NewPayload(util.RandomOwner(), time.Minute)
+	payload, err := token_maker.NewPayload(util.RandomOwner(), time.Minute)
 	require.NoError(t, err)
 
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodNone, payload)
@@ -60,6 +61,6 @@ func TestInvalidJWTToken(t *testing.T) {
 
 	payload, err = maker.VerifyToken(token)
 	require.Error(t, err)
-	require.EqualError(t, err, ErrInvalidToken.Error())
+	require.EqualError(t, err, token_maker.ErrInvalidToken.Error())
 	require.Nil(t, payload)
 }
