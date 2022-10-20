@@ -43,14 +43,14 @@ func (e eqCreateUserMatcher) String() string {
 	return fmt.Sprintf("matches arg %v and password %v", e.arg, e.password)
 }
 
-func EqCreateUserParams(arg db.CreateUserParams, password string) gomock.Matcher {
+func eqCreateUserParams(arg db.CreateUserParams, password string) gomock.Matcher {
 	return eqCreateUserMatcher{
 		arg:      arg,
 		password: password,
 	}
 }
 
-func Test_CreateUserAPI(t *testing.T) {
+func TestCreateUserAPI(t *testing.T) {
 	user, password := randomUser(t)
 
 	testCases := []struct {
@@ -74,7 +74,7 @@ func Test_CreateUserAPI(t *testing.T) {
 					Email:    user.Email,
 				}
 				store.EXPECT().
-					CreateUser(gomock.Any(), EqCreateUserParams(arg, password)).
+					CreateUser(gomock.Any(), eqCreateUserParams(arg, password)).
 					Times(1).
 					Return(user, nil)
 			},
@@ -98,7 +98,7 @@ func Test_CreateUserAPI(t *testing.T) {
 					Email:    user.Email,
 				}
 				store.EXPECT().
-					CreateUser(gomock.Any(), EqCreateUserParams(arg, password)).
+					CreateUser(gomock.Any(), eqCreateUserParams(arg, password)).
 					Times(1).
 					Return(db.User{}, &pq.Error{Code: "23505"})
 			},
@@ -121,7 +121,7 @@ func Test_CreateUserAPI(t *testing.T) {
 					Email:    user.Email,
 				}
 				store.EXPECT().
-					CreateUser(gomock.Any(), EqCreateUserParams(arg, password)).
+					CreateUser(gomock.Any(), eqCreateUserParams(arg, password)).
 					Times(1).
 					Return(db.User{}, &pq.Error{Code: "23505"})
 			},
@@ -209,7 +209,7 @@ func Test_CreateUserAPI(t *testing.T) {
 			store := mockdb.NewMockStore(ctrl)
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			data, err := json.Marshal(tc.body)
