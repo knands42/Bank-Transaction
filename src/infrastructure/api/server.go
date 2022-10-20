@@ -35,6 +35,8 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 	router.GET("/accounts/:id", server.getAccount)
 	router.GET("/accounts/", server.listAccount)
 
+	router.POST("/transfers/", server.createTransfer)
+
 	server.router = router
 	return server, nil
 }
