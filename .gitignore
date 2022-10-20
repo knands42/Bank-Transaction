@@ -20,3 +20,8 @@
 
 # Docker
 .docker/postgres/dbdata
+
+# IDEs
+.fleet
+.vscode
+.idea
