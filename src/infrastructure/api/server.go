@@ -8,6 +8,8 @@ import (
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/token/paseto"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
 )
 
 type Server struct {
@@ -28,6 +30,10 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 		tokenMaker: tokenMaker,
 	}
 	router := gin.Default()
+
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		v.RegisterValidation("currency", validCurrency)
+	}
 
 	router.POST("/users", server.createUser)
 
