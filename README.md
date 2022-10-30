@@ -17,7 +17,7 @@ make execute
 To generate new migrations just hit the code below:
   
 ```shell
-make create_migration file=example_schema
+make create_migration file_name=example_schema
 ```
 
 A new file should be created under `src/infrastructure/db/migrations` with the name `000002_schema_migration_up.sql` and `000002_schema_migration_down.sql`.
@@ -33,7 +33,7 @@ make migrate_down
 To generate new queries from the queries located at `src/infrastructure/db/migrations` just hit the code below:
   
 ```shell
-make generate_query
+make query
 ```
 
 Files under `src/infrastructure/db/queries` should be generated (DO NOT EDIT), they are like CRUD automatically generated from .sql files.

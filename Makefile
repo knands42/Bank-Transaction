@@ -4,7 +4,7 @@ execute:
 	docker compose up --build --force-recreate
 
 create_migration:
-	migrate create -ext sql -dir src/infrastructure/db/migrations -seq example_schema
+	migrate create -ext sql -dir src/infrastructure/db/migrations -seq $(file_name)
 
 migrate_up:
 	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose up
