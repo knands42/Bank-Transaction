@@ -1,8 +1,12 @@
-FROM golang:1.19.0-bullseye
+# Build stage
+FROM golang:1.19.2-alpine3.16 AS builder
+WORKDIR /apps
+COPY . .
+RUN go build -o main src/main.go
 
-RUN apt update && apt upgrade -y
-RUN apt install bash curl make gcc g++ -y
-
-ENV PATH="$PATH:/bin/bash"
-
-WORKDIR /go/Database-Transactions-Simulation
+# Run stage
+FROM alpine:3.16
+WORKDIR /apps
+COPY --from=builder /apps/main .
+EXPOSE 8080
+CMD ["./main"]

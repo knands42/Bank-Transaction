@@ -6,9 +6,13 @@ fi
 
 export TERM=xterm
 
+# INSTALL DEPENDENCIES
+apt update && apt upgrade -y
+apt install make gcc g++ bash curl -y
+ENV PATH="$PATH:/bin/bash"
+
 # INSTALL MIGRATE BIN
 echo "Installing migrate..."
-mkdir /gobin
 cd /go/bin
 curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz
 cd -
@@ -22,5 +26,3 @@ go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
 # EXECUTE SQLC
 echo "Executing sqlc..."
 sqlc generate
-
-top -b
