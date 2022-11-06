@@ -30,10 +30,16 @@ make migrate_down
 
 ### QUERIES
 
-To generate new queries from the queries located at `src/infrastructure/db/migrations` just hit the code below:
+To generate new code for the queries located at `src/infrastructure/db/queries`, first make sure that you have the sqlc tool installed.
+
+```shell
+go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
+```
+
+After that just hit the code below:
   
 ```shell
 make query
 ```
 
-Files under `src/infrastructure/db/queries` should be generated (DO NOT EDIT), they are like CRUD automatically generated from .sql files.
+Files under `src/infrastructure/db/sqlc` should be generated (DO NOT EDIT), they are like CRUD automatically generated from .sql files.
