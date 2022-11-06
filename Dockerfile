@@ -14,6 +14,7 @@ COPY --from=builder /app/migrate ./migrate
 COPY app.env .
 COPY start.sh .
 COPY wait-for.sh .
+RUN chown 1000:1000 start.sh
 COPY src/infrastructure/db/migrations ./migrations
 
 EXPOSE 8080
