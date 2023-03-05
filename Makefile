@@ -7,6 +7,9 @@ docker_down:
 docker_up: docker_down
 	docker-compose up --build --force-recreate
 
+docker_up_deps: docker_down
+	docker-compose up postgres
+
 ############################### MIGRATE ###############################
 migration_create:
 	migrate create -ext sql -dir src/infrastructure/db/migrations -seq $(NAME)

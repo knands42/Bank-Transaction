@@ -1,25 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ ! -f "app.env" ]; then
-    touch app.env
-fi
-
+touch app.env
 export TERM=xterm
 
-# INSTALL MIGRATE BIN
+###################################### Install migrate bin ######################################
 echo "Installing migrate..."
 cd /go/bin
 curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz
 cd -
-# EXECUTE MIGRATE BIN
+###################################### Execute migrate bin ######################################
 echo "Executing migrate..."
 migrate -path src/infrastructure/db/migrations -database "$DB_SOURCE" -verbose up
 
-# INTALL SQLC
+###################################### Install SQLC ######################################
 echo "Installing sqlc..."
 go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
-# EXECUTE SQLC
-echo "Executing sqlc..."
-sqlc generate
 
-top -b
+###################################### Running the application ######################################
+/app/main
