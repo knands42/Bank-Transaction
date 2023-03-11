@@ -7,7 +7,5 @@ CREATE TABLE "users" (
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
-ALTER TABLE "accounts" ADD FOREIGN KEY ("owner") REFERENCES "users" ("username");
-
--- CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
-ALTER TABLE "accounts" ADD CONSTRAINT "owner_currency_key" UNIQUE ("owner", "currency");
+ALTER TABLE "accounts" ADD CONSTRAINT "fk_accounts_owner" FOREIGN KEY ("owner") REFERENCES "users" ("username");
+ALTER TABLE "accounts" ADD CONSTRAINT "key_owner_currency" UNIQUE ("owner", "currency");
