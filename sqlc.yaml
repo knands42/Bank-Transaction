@@ -1,9 +1,9 @@
 version: "1"
 packages:
   - name: "db"
-    path: "./src/infrastructure/db/sqlc"
-    queries: "./src/infrastructure/db/queries/"
-    schema: "./src/infrastructure/db/migrations/"
+    path: "./app/internal/db/sqlc"
+    queries: "./app/internal/db/queries/"
+    schema: "./app/internal/db/migrations/"
     engine: "postgresql"
     emit_json_tags: true
     emit_prepared_queries: false

@@ -20,7 +20,7 @@ To generate new migrations just hit the code below:
 make create_migration file_name=example_schema
 ```
 
-A new file should be created under `src/infrastructure/db/migrations` with the name `000002_schema_migration_up.sql` and `000002_schema_migration_down.sql`.
+A new file should be created under `app/internal/db/migrations` with the name `000002_schema_migration_up.sql` and `000002_schema_migration_down.sql`.
 After editing these two sql files just hit the code below to apply.
 
 ```shell
@@ -30,7 +30,7 @@ make migrate_down
 
 ### QUERIES
 
-To generate new code for the queries located at `src/infrastructure/db/queries`, first make sure that you have the sqlc tool installed.
+To generate new code for the queries located at `app/internal/db/queries`, first make sure that you have the sqlc tool installed.
 
 ```shell
 go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
@@ -42,4 +42,4 @@ After that just hit the code below:
 make query
 ```
 
-Files under `src/infrastructure/db/sqlc` should be generated (DO NOT EDIT), they are like CRUD automatically generated from .sql files.
+Files under `app/internal/db/sqlc` should be generated (DO NOT EDIT), they are like CRUD automatically generated from .sql files.

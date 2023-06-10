@@ -10,7 +10,7 @@ curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migr
 cd -
 ###################################### Execute migrate bin ######################################
 echo "Executing migrate..."
-migrate -path src/infrastructure/db/migrations -database "$DB_SOURCE" -verbose up
+migrate -path app/internal/db/migrations -database "$DB_SOURCE" -verbose up
 
 ###################################### Install SQLC ######################################
 echo "Installing sqlc..."

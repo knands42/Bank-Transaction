@@ -15,19 +15,19 @@ docker_up_deps_test: docker_down
 
 ############################### Migrate ###############################
 migration_create:
-	migrate create -ext sql -dir src/infrastructure/db/migrations -seq $(NAME)
+	migrate create -ext sql -dir app/internal/db/migrations -seq $(NAME)
 
 migration_up:
-	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" up
+	migrate -path app/internal/db/migrations -database "$(DB_SOURCE)" up
 
 migrate_up1:
-	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose up 1
+	migrate -path app/internal/db/migrations -database "$(DB_SOURCE)" -verbose up 1
 
 migrate_down:
-	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose down
+	migrate -path app/internal/db/migrations -database "$(DB_SOURCE)" -verbose down
 
 migrate_down1:
-	migrate -path src/infrastructure/db/migrations -database "$(DB_SOURCE)" -verbose down 1
+	migrate -path app/internal/db/migrations -database "$(DB_SOURCE)" -verbose down 1
 
 
 ############################### Sqlc ###############################
@@ -35,8 +35,8 @@ sqlc_query:
 	sqlc generate
 
 ############################### Mockgen ###############################
-DB_PATH = "src/infrastructure/db/sqlc/store.go"
-DB_PATH_MOCKGEN = src/infrastructure/db/mock
+DB_PATH = "app/internal/db/sqlc/store.go"
+DB_PATH_MOCKGEN = app/internal/db/mock
 
 mockgen:
 	mockgen -source=$(DB_PATH) -destination=$(DB_PATH_MOCKGEN)/`basename $(DB_PATH)`

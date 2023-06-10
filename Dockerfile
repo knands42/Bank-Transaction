@@ -16,7 +16,7 @@ COPY start.sh .
 COPY wait-for.sh .
 RUN chmod +x start.sh
 RUN chown root:root start.sh
-COPY src/infrastructure/db/migrations ./migrations
+COPY app/internal/db/migrations ./migrations
 
 EXPOSE 8080
 ENTRYPOINT [ "/app/start.sh" ]
