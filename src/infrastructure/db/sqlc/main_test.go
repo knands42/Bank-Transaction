@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/migrations"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 	_ "github.com/lib/pq"
 )
@@ -14,7 +15,8 @@ var testQueries *Queries
 var testDB *sql.DB
 
 func TestMain(m *testing.M) {
-	config, err := util.LoadConfig("../../../..")
+	config := util.NewConfig()
+	err := config.LoadConfig("test")
 	if err != nil {
 		log.Fatal("cannot load config:", err)
 	}
@@ -24,7 +26,13 @@ func TestMain(m *testing.M) {
 		log.Fatal("cannot connect to db:", err)
 	}
 
+	migrateDir, err := util.GetMigrationsFolder()
+	if err != nil {
+		log.Fatal("cannot get migrations folder:", err)
+	}
+	migrations.Up(testDB, os.DirFS(migrateDir))
 	testQueries = New(testDB)
 
+	defer migrations.Down(testDB, os.DirFS(migrateDir))
 	os.Exit(m.Run())
 }

@@ -25,3 +25,7 @@
 .fleet
 .vscode
 .idea
+
+# Others
+.TODO
+.cache_ggshield
