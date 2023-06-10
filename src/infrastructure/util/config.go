@@ -19,8 +19,15 @@ type Config struct {
 }
 
 func NewConfig() *Config {
+	var defaultEnv string
+	if os.Getenv("ENV") == "" {
+		defaultEnv = "local"
+	} else {
+		defaultEnv = os.Getenv("ENV")
+	}
+
 	return &Config{
-		Profile: "local",
+		Profile: defaultEnv,
 	}
 }
 
