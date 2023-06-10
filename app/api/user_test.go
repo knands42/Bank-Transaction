@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
@@ -241,7 +241,7 @@ func randomUser(t *testing.T) (user db.User, password string) {
 }
 
 func requireBodyMatchUser(t *testing.T, body *bytes.Buffer, user db.User) {
-	data, err := ioutil.ReadAll(body)
+	data, err := io.ReadAll(body)
 	require.NoError(t, err)
 
 	var gotUser db.User

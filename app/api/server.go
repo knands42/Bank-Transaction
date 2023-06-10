@@ -5,7 +5,7 @@ import (
 
 	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token/paseto"
+	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token/factory"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -20,7 +20,7 @@ type Server struct {
 }
 
 func NewServer(config util.Config, store db.Store) (*Server, error) {
-	tokenMaker, err := paseto.NewPasetoMaker(config.TokenSymmetricKey)
+	tokenMaker, err := factory.TokenFactory(&config)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}

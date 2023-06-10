@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/lib/pq"
-	_ "github.com/lib/pq"
 
 	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
