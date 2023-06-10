@@ -8,4 +8,4 @@ CREATE TABLE "users" (
 );
 
 ALTER TABLE "accounts" ADD CONSTRAINT "fk_accounts_owner" FOREIGN KEY ("owner") REFERENCES "users" ("username");
-ALTER TABLE "accounts" ADD CONSTRAINT "key_owner_currency" UNIQUE ("owner", "currency");
+ALTER TABLE "accounts" ADD CONSTRAINT "uk_owner_currency" UNIQUE ("owner", "currency");

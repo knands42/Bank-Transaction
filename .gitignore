@@ -25,3 +25,6 @@
 .fleet
 .vscode
 .idea
+
+# Others
+.TODO

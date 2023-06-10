@@ -4,22 +4,44 @@ import (
 	"database/sql"
 	"log"
 	"os"
-	"path/filepath"
 
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/api"
+	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/migrations"
 	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/db/sqlc"
 	"github.com/caiofernandes00/Database-Transactions-Simulation.git/src/infrastructure/util"
 )
 
 func main() {
 	config := loadEnv()
+	dbConnection := connectDb(config)
+	store := db.NewStore(dbConnection)
 
-	conn, err := sql.Open(config.DBDriver, config.DBSource)
+	serverInitializer(config, store)
+}
+
+func loadEnv() *util.Config {
+	config := util.NewConfig()
+	config.LoadConfig(config.Profile)
+	return config
+}
+
+func connectDb(config *util.Config) *sql.DB {
+	var err error
+	dbConnection, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
 
-	store := db.NewStore(conn)
+	migrateDir, err := util.GetMigrationsFolder()
+	if err != nil {
+		log.Fatal("cannot get migrations folder:", err)
+	}
+	migrations.Up(dbConnection, os.DirFS(migrateDir))
+
+	return dbConnection
+}
+
+func serverInitializer(config *util.Config, store db.Store) {
 	server, err := api.NewServer(*config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
@@ -29,29 +51,4 @@ func main() {
 	if err != nil {
 		log.Fatal("cannot start server:", err)
 	}
-}
-
-func loadEnv() *util.Config {
-	config := util.NewConfig()
-	path, _ := getRootFile()
-
-	config.LoadConfig(path)
-
-	return config
-}
-
-func getRootFile() (ex string, err error) {
-	ex, _ = os.Getwd()
-	_, err = os.Stat(filepath.Join(ex, "app.env"))
-
-	if err != nil {
-		ex = filepath.Join(ex, "../")
-		_, err = os.Stat(filepath.Join(ex, "app.env"))
-
-		if err != nil {
-			log.Println("No env file provided, using only env variables")
-		}
-	}
-
-	return
 }
