@@ -34,12 +34,12 @@ func NewHashingConfig(salt string, options ...HashOptions) *HashingConfig {
 	return config
 }
 
-func (h *HashingConfig) HashPassword(password string) string {
+func (h *HashingConfig) HashPassword(password string) []byte {
 	hashedPassword := argon2.IDKey([]byte(password), []byte(h.Salt), h.Time, h.Memory, h.CPUNumber, h.KeyLength)
 
-	return string(hashedPassword)
+	return hashedPassword
 }
 
-func (h *HashingConfig) CheckPassword(password string, hashedPassword string) bool {
-	return h.HashPassword(password) == hashedPassword
+func (h *HashingConfig) CheckPassword(password string, hashedPassword []byte) bool {
+	return string(h.HashPassword(password)) == string(hashedPassword)
 }
