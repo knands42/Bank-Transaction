@@ -36,10 +36,11 @@ sqlc_query:
 
 ############################### Mockgen ###############################
 DB_PATH = "app/internal/db/sqlc/store.go"
+DB_AUX_PATH = "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc=github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc/querier.go"
 DB_PATH_MOCKGEN = app/internal/db/mock
 
 mockgen:
-	mockgen -source=$(DB_PATH) -destination=$(DB_PATH_MOCKGEN)/`basename $(DB_PATH)`
+	mockgen -source=$(DB_PATH) -aux_files=$(DB_AUX_PATH) -destination=$(DB_PATH_MOCKGEN)/`basename $(DB_PATH)`
 
 ############################### App ###############################
 app_run:
