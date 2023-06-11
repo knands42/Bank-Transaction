@@ -1,9 +1,8 @@
 # Build stage
 FROM golang:1.20
-WORKDIR /app
+WORKDIR /goapp
 COPY . .
-RUN go build -o main src/main.go
-RUN apt install curl tar make gcc
+RUN go build -o main app/cmd/main.go
 
 EXPOSE 8080
-CMD ["/app/main"]
+CMD ["go", "run", "app/cmd/main.go"]

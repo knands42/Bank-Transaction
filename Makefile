@@ -5,7 +5,7 @@ docker_down:
 	docker-compose down
 
 docker_up: docker_down
-	docker-compose up --build --force-recreate
+	docker-compose up app --build --force-recreate
 
 docker_up_deps_app: docker_down
 	docker-compose up postgres
@@ -32,7 +32,7 @@ migrate_down1:
 
 ############################### Sqlc ###############################
 sqlc_query:
-	sqlc generate
+	docker run --rm -v ${PWD}:/src -w /src kjconroy/sqlc generate
 
 ############################### Mockgen ###############################
 DB_PATH = "app/internal/db/sqlc/store.go"
@@ -43,10 +43,10 @@ mockgen:
 
 ############################### App ###############################
 app_run:
-	go run src/main.go
+	go run app/cmd/main.go
 
 app_build:
-	go build -o main src/main.go
+	go build -o main app/cmd/main.go
 
 app_test:
 	go test -v ./...

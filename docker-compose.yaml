@@ -6,14 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile.local
     container_name: database-transactions-simulation-app
-    entrypoint: /docker-entrypoint/entrypoint.sh
     ports:
       - 8080:8080
     networks:
       - database-transactions-simulation-network
     volumes:
       - .:/goapp
-      - .docker/app/entrypoint.sh:/docker-entrypoint/entrypoint.sh
     environment:
       - DB_SOURCE=postgresql://postgres:root@database-transactions-simulation-db:5432/simple_bank?sslmode=disable
     depends_on:
