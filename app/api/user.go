@@ -6,7 +6,6 @@ import (
 	"time"
 
 	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
 )
@@ -43,11 +42,7 @@ func (server *Server) createUser(ctx *gin.Context) {
 		return
 	}
 
-	hashedPassword, err := util.HashPassword(req.Password)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
-	}
+	hashedPassword := server.hashingConfig.HashPassword(req.Password)
 
 	arg := db.CreateUserParams{
 		Username:       req.Username,
@@ -102,8 +97,8 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		return
 	}
 
-	err = util.CheckPassword(req.Password, user.HashedPassword)
-	if err != nil {
+	isEqual := server.hashingConfig.CheckPassword(req.Password, user.HashedPassword)
+	if !isEqual {
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
 		return
 	}

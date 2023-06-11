@@ -11,13 +11,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+var SALT = util.RandomString(6)
+
 func newTestServer(t *testing.T, store db.Store) *Server {
 	config := util.Config{
 		TokenSymmetricKey:   util.RandomString(32),
 		AccessTokenDuration: time.Minute,
 	}
+	hashingConfig := util.NewHashingConfig(SALT)
 
-	server, err := NewServer(config, store)
+	server, err := NewServer(config, store, hashingConfig)
 	require.NoError(t, err)
 
 	return server

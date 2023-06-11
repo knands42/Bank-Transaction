@@ -1,20 +1,45 @@
 package util
 
 import (
-	"fmt"
-
-	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/crypto/argon2"
 )
 
-func HashPassword(password string) (string, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return "", fmt.Errorf("failed to hash password: %w", err)
-	}
-
-	return string(hashedPassword), nil
+type HashingConfig struct {
+	Salt      string
+	Time      uint32
+	Memory    uint32
+	CPUNumber uint8
+	KeyLength uint32
 }
 
-func CheckPassword(password string, hashedPassword string) error {
-	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+type HashOptions = func(*HashingConfig)
+
+func defaultConfig() *HashingConfig {
+	return &HashingConfig{
+		Time:      1,
+		Memory:    64 * 1024,
+		CPUNumber: 4,
+		KeyLength: 32,
+	}
+}
+
+func NewHashingConfig(salt string, options ...HashOptions) *HashingConfig {
+	config := defaultConfig()
+	config.Salt = salt
+
+	for _, option := range options {
+		option(config)
+	}
+
+	return config
+}
+
+func (h *HashingConfig) HashPassword(password string) string {
+	hashedPassword := argon2.IDKey([]byte(password), []byte(h.Salt), h.Time, h.Memory, h.CPUNumber, h.KeyLength)
+
+	return string(hashedPassword)
+}
+
+func (h *HashingConfig) CheckPassword(password string, hashedPassword string) bool {
+	return h.HashPassword(password) == hashedPassword
 }

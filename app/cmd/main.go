@@ -15,8 +15,9 @@ func main() {
 	config := loadEnv()
 	dbConnection := connectDb(config)
 	store := db.NewStore(dbConnection)
+	hashingConfig := util.NewHashingConfig(config.PasswordHashSalt)
 
-	serverInitializer(config, store)
+	serverInitializer(config, store, hashingConfig)
 }
 
 func loadEnv() *util.Config {
@@ -41,8 +42,8 @@ func connectDb(config *util.Config) *sql.DB {
 	return dbConnection
 }
 
-func serverInitializer(config *util.Config, store db.Store) {
-	server, err := api.NewServer(*config, store)
+func serverInitializer(config *util.Config, store db.Store, hashingConfig *util.HashingConfig) {
+	server, err := api.NewServer(*config, store, hashingConfig)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
 	}

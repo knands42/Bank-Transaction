@@ -30,8 +30,8 @@ func (e eqCreateUserMatcher) Matches(x interface{}) bool {
 		return false
 	}
 
-	err := util.CheckPassword(e.password, arg.HashedPassword)
-	if err != nil {
+	isEqual := util.NewHashingConfig(SALT).CheckPassword(e.password, arg.HashedPassword)
+	if !isEqual {
 		return false
 	}
 
@@ -227,8 +227,8 @@ func TestCreateUserAPI(t *testing.T) {
 
 func randomUser(t *testing.T) (user db.User, password string) {
 	password = util.RandomString(6)
-	hashedPassword, err := util.HashPassword(password)
-	require.NoError(t, err)
+
+	hashedPassword := util.NewHashingConfig(SALT).HashPassword(password)
 
 	user = db.User{
 		Username:       util.RandomOwner(),

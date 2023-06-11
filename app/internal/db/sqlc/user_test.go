@@ -9,9 +9,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+var SALT = util.RandomString(6)
+
 func createRandomUser(t *testing.T) User {
-	hashedPassword, err := util.HashPassword(util.RandomString(5))
-	require.NoError(t, err)
+	hashedPassword := util.NewHashingConfig(SALT).HashPassword(util.RandomString(5))
 
 	arg := CreateUserParams{
 		Username:       util.RandomOwner(),

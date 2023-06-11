@@ -13,13 +13,14 @@ import (
 )
 
 type Server struct {
-	config     util.Config
-	store      db.Store
-	tokenMaker token.Maker
-	router     *gin.Engine
+	config        util.Config
+	store         db.Store
+	tokenMaker    token.Maker
+	router        *gin.Engine
+	hashingConfig *util.HashingConfig
 }
 
-func NewServer(config util.Config, store db.Store) (*Server, error) {
+func NewServer(config util.Config, store db.Store, hashingConfig *util.HashingConfig) (*Server, error) {
 	tokenMaker, err := factory.TokenFactory(&config)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
@@ -28,6 +29,7 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 		config:     config,
 		store:      store,
 		tokenMaker: tokenMaker,
+		hashingConfig: hashingConfig,
 	}
 
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
