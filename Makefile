@@ -35,12 +35,8 @@ sqlc_query:
 	docker run --rm -v ${PWD}:/src -w /src kjconroy/sqlc generate
 
 ############################### Mockgen ###############################
-DB_PATH = "app/internal/db/sqlc/store.go"
-DB_AUX_PATH = "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc=querier.go"
-DB_PATH_MOCKGEN = app/internal/db/mock
-
 mockgen:
-	mockgen -source app/internal/db/sqlc/store.go -destination app/internal/db/mock/store.go -package mock_sqlc Store
+	mockgen -source app/internal/db/sqlc/store.go -destination app/internal/db/mock/store.go
 
 ############################### App ###############################
 app_run:
