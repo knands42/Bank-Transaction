@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
+	db "github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/sqlc"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/util"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/require"
 )

@@ -3,10 +3,10 @@ package api
 import (
 	"fmt"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token/factory"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
+	db "github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/sqlc"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token/factory"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/util"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"

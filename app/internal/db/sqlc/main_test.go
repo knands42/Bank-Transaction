@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/migrations"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/migrations"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/util"
 	_ "github.com/lib/pq"
 )
 

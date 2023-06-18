@@ -48,6 +48,12 @@ app_build:
 app_test:
 	go test -v ./...
 
+############################### Proto ###############################
+proto:
+	protoc --proto_path=app/pkg/proto --go_out=app/pkg/proto/pb --go_opt=paths=source_relative \
+ 	--go-grpc_out=app/pkg/proto/pb --go-grpc_opt=paths=source_relative \
+ 	app/pkg/proto/*.proto
+
 ############################### Phony ###############################
 .PHONY:
-	docker_down docker_up docker_up_deps migration_create migration_up migrate_up1 migrate_down migrate_down1 sqlc_query mockgen app_run app_build app_tests
+	docker_down docker_up docker_up_deps migration_create migration_up migrate_up1 migrate_down migrate_down1 sqlc_query mockgen app_run app_build app_tests proto

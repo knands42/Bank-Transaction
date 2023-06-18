@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token"
 	"github.com/gin-gonic/gin"
 )
 

@@ -5,10 +5,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/api"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/migrations"
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/api"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/migrations"
+	db "github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/sqlc"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/util"
 )
 
 func main() {

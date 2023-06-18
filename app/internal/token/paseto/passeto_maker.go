@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	token_maker "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
+	token_maker "github.com/caiofernandes00/Bank-Transaction.git/app/internal/token"
 	"github.com/o1egl/paseto"
 	"golang.org/x/crypto/chacha20poly1305"
 )

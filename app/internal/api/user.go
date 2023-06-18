@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
+	db "github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/sqlc"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/lib/pq"

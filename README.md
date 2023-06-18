@@ -1,4 +1,4 @@
-# Database-Transactions-Simulation
+# Bank-Transaction
 
 An application to learn golang and focusing in databases
 

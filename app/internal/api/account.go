@@ -7,8 +7,8 @@ import (
 
 	"github.com/lib/pq"
 
-	db "github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/db/sqlc"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
+	db "github.com/caiofernandes00/Bank-Transaction.git/app/internal/db/sqlc"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token"
 	"github.com/gin-gonic/gin"
 )
 

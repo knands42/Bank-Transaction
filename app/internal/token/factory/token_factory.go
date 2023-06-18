@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token/jwt"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/token/paseto"
-	"github.com/caiofernandes00/Database-Transactions-Simulation.git/app/internal/util"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token/jwt"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/token/paseto"
+	"github.com/caiofernandes00/Bank-Transaction.git/app/internal/util"
 )
 
 func TokenFactory(config *util.Config) (token.Maker, error) {
