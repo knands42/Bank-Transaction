@@ -37,3 +37,18 @@ variable "vpc_cidr_block" {
   type    = string
   default = "10.0.0.0/16"
 }
+
+variable "database_name" {
+  type    = string
+  default = "simplebank"
+}
+
+variable "database_username" {
+  type    = string
+  default = "masteruser"
+}
+
+variable "database_port" {
+  type    = number
+  default = 5432
+}

@@ -1,7 +1,7 @@
 variable "prefix" {
-    type = string
+  type = string
 }
 
 variable "ecr_repository" {
-    type = string
+  type = string
 }
