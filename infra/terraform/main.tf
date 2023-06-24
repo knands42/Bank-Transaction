@@ -26,13 +26,13 @@ module "my-secret-manager" {
   database_host     = module.my-rds-postgres.database_host
 }
 
-# module "my-eks" {
-#   source            = "./modules/eks"
-#   prefix            = var.prefix
-#   vpc_id            = module.my-vpc.vpc_id
-#   cluster_name      = var.cluster_name
-#   retention_days    = var.retention_days
-#   node_desired_size = var.node_desired_size
-#   node_max_size     = var.node_max_size
-#   node_min_size     = var.node_min_size
-# }
+module "my-eks" {
+  source            = "./modules/eks"
+  prefix            = var.prefix
+  vpc_id            = module.my-vpc.vpc_id
+  cluster_name      = var.cluster_name
+  retention_days    = var.retention_days
+  node_desired_size = var.node_desired_size
+  node_max_size     = var.node_max_size
+  node_min_size     = var.node_min_size
+}

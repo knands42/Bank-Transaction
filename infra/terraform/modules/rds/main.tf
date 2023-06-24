@@ -1,7 +1,7 @@
 resource "random_password" "random_password" {
   length           = 16
   special          = true
-  override_special = "_%@"
+  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 resource "aws_db_instance" "postgres_instance" {
@@ -15,5 +15,6 @@ resource "aws_db_instance" "postgres_instance" {
   password               = random_password.random_password.result
   parameter_group_name   = "default.postgres12"
   skip_final_snapshot   = true
+  apply_immediately      = true
 }
 

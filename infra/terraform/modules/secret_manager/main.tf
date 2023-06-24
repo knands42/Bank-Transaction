@@ -1,5 +1,6 @@
 resource "aws_secretsmanager_secret" "simple_bank_secrets" {
-  name = "simplebank"
+  name = "simplebanksecrets"
+  recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "simple_bank_secrets_version" {
