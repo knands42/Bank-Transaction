@@ -55,12 +55,17 @@ func (c *Config) LoadConfig(env string) (err error) {
 
 func GetRootPath() (ex string, err error) {
 	ex, _ = os.Getwd()
-	_, err = os.Stat(filepath.Join(ex, "go.mod"))
+	fileToStat := "go.mod"
+	if os.Getenv("ENV") == "prod" {
+		fileToStat = "main"
+	}
+
+	_, err = os.Stat(filepath.Join(ex, fileToStat))
 
 	if err != nil {
 		for i := 0; i < 5; i++ {
 			ex = filepath.Join(ex, "../")
-			_, err = os.Stat(filepath.Join(ex, "go.mod"))
+			_, err = os.Stat(filepath.Join(ex, fileToStat))
 
 			if err == nil {
 				break

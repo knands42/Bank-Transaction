@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-bank-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-bank-deployment
+  template:
+    metadata:
+      labels:
+        app: simple-bank-deployment
+    spec:
+      containers:
+      - name: simple-bank-deployment
+        image: 756504842129.dkr.ecr.us-east-1.amazonaws.com/simplebank-my-ecr:3a51ef3b1c8b20a0adeddf8ddd3b154e6c7b6e17
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
