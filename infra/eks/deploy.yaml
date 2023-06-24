@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-bank-deployment
-        image: 756504842129.dkr.ecr.us-east-1.amazonaws.com/simplebank-my-ecr:c438054175a026e5f82e70c956979edd0b9c5320
+        image: 756504842129.dkr.ecr.us-east-1.amazonaws.com/simplebank-my-ecr:e78f5065bb5a0d50a6475c6317062590994a546c
         resources:
           limits:
             memory: "128Mi"
