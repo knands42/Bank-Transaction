@@ -36,9 +36,3 @@ variable "database_port" {
   type    = number
   default = 5432
 }
-
-
-variable "database_ssl_mode" {
-  type    = string
-  default = "disable"
-}
