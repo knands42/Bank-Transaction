@@ -7,8 +7,9 @@ RUN go build -o main app/cmd/main.go
 # Run stage
 FROM alpine:3.16
 WORKDIR /app
+ENV ENV prod
 COPY --from=builder /app/main .
-COPY app.prod.env .
+COPY --from=builder /app/app.prod.env .
 
 EXPOSE 8080
 CMD ["/app/main"]
