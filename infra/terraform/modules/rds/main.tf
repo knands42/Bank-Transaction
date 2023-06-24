@@ -14,7 +14,7 @@ resource "aws_db_instance" "postgres_instance" {
   username               = var.database_username
   password               = random_password.random_password.result
   parameter_group_name   = "default.postgres12"
-  skip_final_snapshot   = true
+  skip_final_snapshot    = true
   apply_immediately      = true
 }
 

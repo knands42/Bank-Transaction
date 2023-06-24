@@ -40,7 +40,7 @@ variable "vpc_cidr_block" {
 
 variable "database_name" {
   type    = string
-  default = "simplebank"
+  default = "simple_bank"
 }
 
 variable "database_username" {
